@@ -1,76 +1,40 @@
 /*==============================================================*/
-/* DBMS name:      Sybase SQL Anywhere 12                       */
-/* Created on:     28/4/2022 19:03:37                           */
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     29/4/2022 00:43:41                           */
 /*==============================================================*/
 
 
-if exists(select 1 from sys.sysforeignkey where role='FK_VENDEDOR_TIENE_VENDEDOR') then
-    alter table VENDEDORLOGIN
-       delete foreign key FK_VENDEDOR_TIENE_VENDEDOR
-end if;
-
-drop index if exists VENDEDOR.VENDEDOR_PK;
-
 drop table if exists VENDEDOR;
-
-drop index if exists VENDEDORLOGIN.TIENE_FK;
-
-drop index if exists VENDEDORLOGIN.VENDEDORLOGIN_PK;
 
 drop table if exists VENDEDORLOGIN;
 
 /*==============================================================*/
 /* Table: VENDEDOR                                              */
 /*==============================================================*/
-create table VENDEDOR 
+create table VENDEDOR
 (
-   IDVR                 integer                        not null,
-   NOMBREVR             varchar(50)                    not null,
-   CIVR                 varchar(20)                    not null,
-   DIRECCIONVR          varchar(50)                    not null,
-   TELEFONOVR           integer                        not null,
-   CORREOELECTRONICOVR  varchar(50)                    null,
-   FEACHADENACIMIENTOVR date                           not null,
-   constraint PK_VENDEDOR primary key (IDVR)
-);
-
-/*==============================================================*/
-/* Index: VENDEDOR_PK                                           */
-/*==============================================================*/
-create unique index VENDEDOR_PK on VENDEDOR (
-IDVR ASC
+   IDVR                 int not null,
+   NOMBREVR             varchar(50) not null,
+   CIVR                 varchar(20) not null,
+   DIRECCIONVR          varchar(50) not null,
+   TELEFONOVR           int not null,
+   CORREOELECTRONICOVR  varchar(50),
+   FECHADENACIMIENTOVR  date not null,
+   primary key (IDVR)
 );
 
 /*==============================================================*/
 /* Table: VENDEDORLOGIN                                         */
 /*==============================================================*/
-create table VENDEDORLOGIN 
+create table VENDEDORLOGIN
 (
-   IDVR                 integer                        not null,
-   IDLOGINVR            char(10)                       not null,
-   USUARIOLOGINVR       varchar(30)                    not null,
-   CONTRASENIALOGINVR   varchar(30)                    not null,
-   constraint PK_VENDEDORLOGIN primary key (IDVR, IDLOGINVR)
+   IDVR                 int not null,
+   IDLOGINVR            int not null,
+   USUARIOLOGINVR       varchar(20) not null,
+   CONTRASENIALOGINVR   varchar(20) not null,
+   primary key (IDVR, IDLOGINVR)
 );
 
-/*==============================================================*/
-/* Index: VENDEDORLOGIN_PK                                      */
-/*==============================================================*/
-create unique index VENDEDORLOGIN_PK on VENDEDORLOGIN (
-IDVR ASC,
-IDLOGINVR ASC
-);
-
-/*==============================================================*/
-/* Index: TIENE_FK                                              */
-/*==============================================================*/
-create index TIENE_FK on VENDEDORLOGIN (
-IDVR ASC
-);
-
-alter table VENDEDORLOGIN
-   add constraint FK_VENDEDOR_TIENE_VENDEDOR foreign key (IDVR)
-      references VENDEDOR (IDVR)
-      on update restrict
-      on delete restrict;
+alter table VENDEDORLOGIN add constraint FK_TIENE foreign key (IDVR)
+      references VENDEDOR (IDVR) on delete restrict on update restrict;
 
