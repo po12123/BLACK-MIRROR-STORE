@@ -41,10 +41,9 @@ public class Login2 extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ZenBook\\Desktop\\4 modi.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login_fondo.jpeg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator2.setOpaque(true);
 
@@ -58,7 +57,6 @@ public class Login2 extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre de usuario:");
 
-        jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator3.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator3.setOpaque(true);
 
