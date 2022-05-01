@@ -15,9 +15,12 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
     /**
      * Creates new form MsgCamposVacios2
      */
+    private Login2 login;
     public MsgCamposVacios2() {
         initComponents();
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +45,7 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
         jLabel4.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 
@@ -53,6 +57,9 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
 
         btnAceptar.setBackground(new java.awt.Color(255, 51, 153));
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAceptarMouseEntered(evt);
             }
@@ -89,7 +96,7 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,6 +132,7 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
@@ -134,6 +142,12 @@ public class MsgCamposVacios2 extends javax.swing.JFrame {
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
         btnAceptar.setBackground(new Color(255,51,153));
     }//GEN-LAST:event_btnAceptarMouseExited
+
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+        login= new Login2();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarMouseClicked
 
     /**
      * @param args the command line arguments

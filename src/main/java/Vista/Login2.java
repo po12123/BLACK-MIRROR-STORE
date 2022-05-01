@@ -15,10 +15,16 @@ public class Login2 extends javax.swing.JFrame {
 
     private Vendedor vendedor;
     private VendedorBD vLog; 
+    private MenuPrincipal menuPrincipal;
+    private MsgCamposVacios2 msgCampoVacio;
+    private MsgDatosIncorrectos msgDatosIncorrectos;
     public Login2() {
         initComponents();
         vendedor=new Vendedor();
         vLog=new VendedorBD();
+         menuPrincipal=new MenuPrincipal();
+         msgCampoVacio= new MsgCamposVacios2();
+         msgDatosIncorrectos= new MsgDatosIncorrectos();
     }
     private void iniciarSesion(){
         String usuario=jTextField3.getText();
@@ -34,20 +40,24 @@ public class Login2 extends javax.swing.JFrame {
                 -Cerrar ventana de inicio
                 -abrir ventana del menu
                 */
-                MenuPrincipal menuPrincipal=new MenuPrincipal();
+                
+                menuPrincipal.setVisible(true);
+                this.dispose();
                 System.out.println("se inicio correctamente");
             }else{
                 /*
                 -avisara de datos incorrectos
                 */
-                
+                msgDatosIncorrectos.setVisible(true);
+                this.dispose();
                 System.out.println("datos incorrectos");
             }
         }else{
             /*
             -avisara de campos vacios
             */
-            MsgCamposVacios2 msgCampoVacio= new MsgCamposVacios2();
+            msgCampoVacio.setVisible(true);
+            this.dispose();
             System.out.println("campos vacios");
         }
     }
