@@ -47,6 +47,24 @@ INSERT INTO `datostienda` (`IDdatosTienda`, `NombreTienda`, `Nit`, `TelefonoT`, 
 	(1, 'Black Mirror Store', '498999012', '498999', 'Calle Antezana #666, Cochabamba-Bolivia', 'Un sitio genial');
 /*!40000 ALTER TABLE `datostienda` ENABLE KEYS */;
 
+-- Volcando estructura para tabla sistemadeventas.producto
+CREATE TABLE IF NOT EXISTS `producto` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CODIGO` varchar(10) NOT NULL,
+  `MARCA` varchar(20) NOT NULL,
+  `MODELO` varchar(50) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL,
+  `PROVEEDOR` varchar(50) DEFAULT NULL,
+  `PRECIO` int(11) NOT NULL,
+  PRIMARY KEY (`ID`) USING BTREE KEY_BLOCK_SIZE=1000
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla sistemadeventas.producto: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` (`ID`, `CODIGO`, `MARCA`, `MODELO`, `CANTIDAD`, `PROVEEDOR`, `PRECIO`) VALUES
+	(4, 'Laptop', 'Dell', 'Alienware', 2, 'Proveedor', 10000);
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+
 -- Volcando estructura para tabla sistemadeventas.proveedor
 CREATE TABLE IF NOT EXISTS `proveedor` (
   `CIPR` int(11) NOT NULL,
@@ -72,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `vendedor` (
   PRIMARY KEY (`IDVR`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla sistemadeventas.vendedor: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla sistemadeventas.vendedor: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
 INSERT INTO `vendedor` (`IDVR`, `NOMBREVR`, `CIVR`, `DIRECCIONVR`, `TELEFONOVR`, `CORREOELECTRONICOVR`, `FECHADENACIMIENTOVR`) VALUES
 	(1, 'carlos', '12345678', 'ayacucho', 71450557, 'correo@gmail.com', '2022-04-01');
@@ -89,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `vendedorlogin` (
   CONSTRAINT `FK_TIENE` FOREIGN KEY (`IDVR`) REFERENCES `vendedor` (`IDVR`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla sistemadeventas.vendedorlogin: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla sistemadeventas.vendedorlogin: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `vendedorlogin` DISABLE KEYS */;
 INSERT INTO `vendedorlogin` (`IDLOGINVR`, `IDVR`, `USUARIOLOGINVR`, `CONTRASENIALOGINVR`) VALUES
 	(1, 1, 'contraseña', 'contraseña');
