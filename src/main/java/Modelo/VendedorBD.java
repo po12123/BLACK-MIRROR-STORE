@@ -38,4 +38,9 @@ public class VendedorBD {
         }
         return v;
     }
+    /*public boolean registrarVendedor(Vendedor ven){
+        String sql = "INSERT INTO vendedor (nombre,ci,direccion,telefono,correo,nacimiento)VALUES (?,?,?,?,?.?)"; 
+        
+        return false;
+    }*/
 }
