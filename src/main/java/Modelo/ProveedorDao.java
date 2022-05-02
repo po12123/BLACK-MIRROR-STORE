@@ -16,7 +16,7 @@ public class ProveedorDao {
        try {
            con = cn.conectar();
            ps = con.prepareStatement(sql);
-           ps.setInt(1, pr.getId());
+           ps.setInt(1, pr.getCi());
            ps.setString(2, pr.getNombre());
            ps.setInt(3, pr.getTelefono());
            ps.setString(4, pr.getDireccion());
