@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Proveedor {
-    private int id;
+    private int ci;
     private String nombre;
     private int telefono;
     private String Direccion;
@@ -10,19 +10,19 @@ public class Proveedor {
     
     }
 
-    public Proveedor(int id, String nombre, int telefono, String Direccion) {
-        this.id = id;
+    public Proveedor(int ci, String nombre, int telefono, String Direccion) {
+        this.ci = ci;
         this.nombre = nombre;
         this.telefono = telefono;
         this.Direccion = Direccion;
     }
 
-    public int getId() {
-        return id;
+    public int getCi() {
+        return ci;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCi(int ci) {
+        this.ci = ci;
     }
 
     public String getNombre() {
