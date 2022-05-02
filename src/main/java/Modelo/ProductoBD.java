@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProductoBD {
     private Connection con;
@@ -59,5 +60,29 @@ public class ProductoBD {
                 System.out.println(e.toString());
             }
         }
+    }
+    public ArrayList<Producto> listarProductos(){
+        ArrayList<Producto> listaProductos=new ArrayList();
+        String sql="SELECT * FROM producto"; 
+        try {
+            con = cn.conectar();
+            ps = con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Producto pro=new Producto();
+                pro.setId(rs.getInt(1));
+                pro.setCodigo(rs.getString(2));
+                pro.setMarca(rs.getString(3));
+                pro.setModelo(rs.getString(4));
+                pro.setCantidad(rs.getInt(5));
+                pro.setProveedor(rs.getString(6));
+                pro.setPrecio(rs.getInt(7));
+                pro.setCategoria(rs.getString(8));
+                listaProductos.add(pro);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en listar producto: "+e.toString());
+        }
+        return listaProductos;
     }
 }
