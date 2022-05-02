@@ -226,6 +226,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
             PrDao.RegistrarProveedor(pr);
             MsgRegistroExitoso b = new MsgRegistroExitoso();
             b.setVisible(true);
+            pr = new Proveedor();
             
         }else{
             MsgCamposVacios2 a = new MsgCamposVacios2();
