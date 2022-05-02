@@ -1,7 +1,7 @@
 
 package Modelo;
 
-import java.sql.Date;
+
 
 public class Vendedor {
     private String nombre;
@@ -9,13 +9,15 @@ public class Vendedor {
     private String direccion;
     private int telefono;
     private String correo;
-    private Date nacimiento;
+    private String nacimiento;
     private String usuario;
     private String contrasenia;
     
     public Vendedor(){}
     public Vendedor(String nombre, String ci, String direccion, int telefono, String correo, 
-                    Date nacimiento, String usuario, String contrasenia){
+                    String nacimiento, String usuario, String contrasenia){
+        
+        
         this.nombre=nombre;
         this.ci=ci;
         this.direccion=direccion;
@@ -46,7 +48,7 @@ public class Vendedor {
         return correo;
     }
 
-    public Date getNacimiento() {
+    public String getNacimiento() {
         return nacimiento;
     }
 
@@ -78,7 +80,7 @@ public class Vendedor {
         this.correo = correo;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 
