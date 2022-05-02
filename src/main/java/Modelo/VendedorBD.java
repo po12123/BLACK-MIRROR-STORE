@@ -2,8 +2,15 @@
 package Modelo;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class VendedorBD {
@@ -38,9 +45,45 @@ public class VendedorBD {
         }
         return v;
     }
-    /*public boolean registrarVendedor(Vendedor ven){
-        String sql = "INSERT INTO vendedor (nombre,ci,direccion,telefono,correo,nacimiento)VALUES (?,?,?,?,?.?)"; 
+    
+    
+   public boolean registrarVendedor(Vendedor ven){
+       
+            String sql = "INSERT INTO vendedor (NOMBREVR,CIVR,DIRECCIONVR,TELEFONOVR,CORREOELECTRONICOVR,FECHADENACIMIENTOVR)VALUES (?,?,?,?,?,?)";
+            
+            
+            try{
+                con=cn.conectar();
+                ps=con.prepareStatement(sql);
+                ps.setString(1,ven.getNombre());
+                ps.setString(2,ven.getCi());
+                ps.setString(3,ven.getDireccion());
+                ps.setInt(4,ven.getTelefono());
+                ps.setString(5,ven.getCorreo());
+                ps.setString(6,ven.getNacimiento());
+                ps.execute();
+                
+                return true;
+                
+           /* }catch (Exception e){
+                System.out.println("Error en registrar vendedor"+ e.toString());
+            }  
+            return false;*/
+               
+            } catch (SQLException e){
+                JOptionPane.showMessageDialog(null,e.toString());
+                return false;
+            }finally{
+                try{
+                    con.close();
+                }catch(SQLException e){
+                    System.out.println(e.toString());
+                }
+                
+            }
         
-        return false;
-    }*/
+        
+   }      
+   
 }
+
