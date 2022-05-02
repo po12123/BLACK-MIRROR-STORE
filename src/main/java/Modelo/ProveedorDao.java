@@ -12,7 +12,7 @@ public class ProveedorDao {
     Conexion cn = new Conexion();
     PreparedStatement ps;
    public boolean RegistrarProveedor(Proveedor pr){
-       String sql = "INSERT INTO proveedor(ci, nombre, telefono, direccion) VALUES (?, ?, ?, ?)";
+       String sql = "INSERT INTO proveedor(CIPR, NOMBREPR, TELEFONOPR, DIRECCIONPR) VALUES (?, ?, ?, ?)";
        try {
            con = cn.conectar();
            ps = con.prepareStatement(sql);
@@ -32,5 +32,6 @@ public class ProveedorDao {
                System.out.println(e.toString());
            }
        }
+   
    }
 }

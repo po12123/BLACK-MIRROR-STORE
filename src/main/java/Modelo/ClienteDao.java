@@ -12,7 +12,7 @@ public class ClienteDao {
     Connection con;
     PreparedStatement ps;
    public boolean RegistrarCliente(Cliente cl){
-       String sql = "INSERT INTO clientes(ci, nombre, telefono, direccion) VALUES (?, ?, ?, ?)";
+       String sql = "INSERT INTO clientes(CICLI, NOMBRECLI, TELEFONOCLI, DIRECCIONCLI) VALUES (?, ?, ?, ?)";
        try {
            con = cn.conectar();
            ps = con.prepareStatement(sql);

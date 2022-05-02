@@ -14,7 +14,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     private registro_clientes registroCli;
-    private Proveedor proveedor;
+    private ProveedorGUI proveedor;
     private ProductoGUI producto;
     public MenuPrincipal() {
         initComponents();
@@ -163,7 +163,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientes1MouseClicked
 
     private void btnProveedores1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedores1MouseClicked
-        proveedor = new Proveedor();
+        proveedor = new ProveedorGUI();
         proveedor.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnProveedores1MouseClicked
