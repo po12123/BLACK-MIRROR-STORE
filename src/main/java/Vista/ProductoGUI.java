@@ -192,6 +192,11 @@ public class ProductoGUI extends javax.swing.JFrame {
                 "ID", "Codigo", "Marca", "Modelo", "Cantidad", "Proveedor", "Precio", "Categoria"
             }
         ));
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaProductos);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 70, 480, 330));
@@ -292,9 +297,27 @@ public class ProductoGUI extends javax.swing.JFrame {
             i = i - 1;
         }
     } 
+    private void LimpiarProducto(){
+        textCodigo.setText("");
+        textMarca.setText("");
+        textModelo.setText("");
+        textCantidad1.setText("");
+        textPrecio.setText("");
+        textCategoria.setText("");
+    }
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        if(!"".equals(textCodigo.getText())){
+            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
+            if(pregunta == 0){
+                int codigo = Integer.parseInt(textCodigo.getText());
+                productoBD.eliminarProducto(codigo);
+                limpiarTabla();
+                listarProductos();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -347,6 +370,17 @@ public class ProductoGUI extends javax.swing.JFrame {
             listarProductosCategoria();
         }   
     }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        int fila = tablaProductos.rowAtPoint(evt.getPoint());
+        textCodigo.setText(tablaProductos.getValueAt(fila, 0).toString());
+        textMarca.setText(tablaProductos.getValueAt(fila, 1).toString());
+        textModelo.setText(tablaProductos.getValueAt(fila, 2).toString());
+        textCantidad1.setText(tablaProductos.getValueAt(fila, 3).toString());
+        cBoxProveedor.setSelectedItem(tablaProductos.getValueAt(fila, 4).toString());
+        textPrecio.setText(tablaProductos.getValueAt(fila, 5).toString());
+        textCategoria.setText(tablaProductos.getValueAt(fila, 6).toString());
+    }//GEN-LAST:event_tablaProductosMouseClicked
 
     /**
      * @param args the command line arguments

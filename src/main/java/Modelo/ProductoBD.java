@@ -135,4 +135,23 @@ public class ProductoBD {
         return pro;
     }
     
+    public boolean eliminarProducto(int codigo){
+       String sql = "DELETE FROM producto WHERE CODIGO=?";
+       try {
+           ps = con.prepareStatement(sql);
+           ps.setInt(1, codigo);
+           ps.execute();
+           return true;
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+           return false;
+       }finally{
+           try {
+               con.close();
+           } catch (SQLException e) {
+               System.out.println(e.toString());
+           }
+       }
+   }
+    
 }
