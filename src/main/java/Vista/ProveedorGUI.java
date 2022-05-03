@@ -3,6 +3,9 @@ package Vista;
 import Modelo.ProveedorDao;
 import Modelo.Proveedor;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +16,8 @@ public class ProveedorGUI extends javax.swing.JFrame {
     ProveedorDao PrDao = new ProveedorDao();
     DefaultTableModel modelo = new DefaultTableModel();
     private MenuPrincipal menuPrincipal;
+    Connection conn;
+    Statement sent;
     public ProveedorGUI() {
         initComponents();
     }
@@ -51,7 +56,8 @@ public class ProveedorGUI extends javax.swing.JFrame {
         btnAtras = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jBuscar = new javax.swing.JButton();
+        txBuscar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,7 +149,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TableProveedor);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 440, 340));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 440, 340));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Save_37110.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +157,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jEliminarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemFolder_256x256_icon-icons.com_76749.png"))); // NOI18N
         jEliminarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -159,13 +165,13 @@ public class ProveedorGUI extends javax.swing.JFrame {
                 jEliminarButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jEliminarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
+        jPanel1.add(jEliminarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
         btnAtras.setBackground(new java.awt.Color(255, 51, 153));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,8 +200,16 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jLabel7.setToolTipText("");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editado.jpeg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
+        jBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscarIcono.png"))); // NOI18N
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 50, -1));
+
+        txBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editado.jpeg"))); // NOI18N
+        jPanel1.add(txBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
@@ -276,6 +290,30 @@ public class ProveedorGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jEliminarButtonActionPerformed
 
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+               int res = 0;
+           try{
+            String nom = jNombreTextField.getText();
+            String query="select * from proveedor where nombrepr='"+nom+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()){
+                res = 1;
+                JOptionPane.showMessageDialog(null, "Proveedor encontrado");
+            }else{
+                LimpiarProveedor();
+                 JOptionPane.showMessageDialog(null,"Este Proveedor no existe. Registrelo en la base de datos","error",JOptionPane.ERROR_MESSAGE);
+            }
+
+            }catch (Exception e){
+                LimpiarProveedor();
+                 JOptionPane.showMessageDialog(null, "Debe colocar el nombre para iniciar la búsqueda","error",JOptionPane.ERROR_MESSAGE);
+                    
+    }                                         
+
+    }//GEN-LAST:event_jBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,13 +353,13 @@ public class ProveedorGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableProveedor;
     private javax.swing.JPanel btnAtras;
+    private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JTextField jCiTextField;
     private javax.swing.JTextField jDireccionTextField;
     private javax.swing.JButton jEliminarButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -332,6 +370,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTelefonoTextField;
+    private javax.swing.JLabel txBuscar;
     // End of variables declaration//GEN-END:variables
     
 }
