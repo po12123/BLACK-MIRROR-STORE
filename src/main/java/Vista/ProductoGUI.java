@@ -313,6 +313,7 @@ public class ProductoGUI extends javax.swing.JFrame {
                 int codigo = Integer.parseInt(textCodigo.getText());
                 productoBD.eliminarProducto(codigo);
                 limpiarTabla();
+                LimpiarProducto();
                 listarProductos();
             }
         }else{
