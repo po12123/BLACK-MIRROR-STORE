@@ -66,7 +66,7 @@ CREATE TABLE `descuento` (
   `idDesc` int(11) NOT NULL,
   `fechaIniDesc` date NOT NULL,
   `fechaFinDesc` date NOT NULL,
-  `codigoProd` int(11) NOT NULL,
+  `codigoProd` varchar(20) NOT NULL,
   `nombreProd` varchar(100) NOT NULL,
   `descuento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
