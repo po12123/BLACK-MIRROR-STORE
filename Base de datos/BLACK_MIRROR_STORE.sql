@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:33065
--- Tiempo de generación: 03-05-2022 a las 06:12:41
+-- Tiempo de generación: 03-05-2022 a las 12:46:52
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -33,6 +33,13 @@ CREATE TABLE `cliente` (
   `TELEFONOCLI` int(11) NOT NULL,
   `DIRECCIONCLI` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`CICLI`, `NOMBRECLI`, `TELEFONOCLI`, `DIRECCIONCLI`) VALUES
+(1234001, 'Maria Reza', 4437899, 'Calle Los Cedros');
 
 -- --------------------------------------------------------
 
@@ -71,6 +78,14 @@ CREATE TABLE `descuento` (
   `descuento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `descuento`
+--
+
+INSERT INTO `descuento` (`idDesc`, `fechaIniDesc`, `fechaFinDesc`, `codigoProd`, `nombreProd`, `descuento`) VALUES
+(1, '2022-05-04', '2022-05-27', 'Laptop', 'Alienware', 124),
+(2, '2022-05-02', '2022-05-28', '12AB', 'Laptop Alienware', 50);
+
 -- --------------------------------------------------------
 
 --
@@ -93,7 +108,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`ID`, `CODIGO`, `MARCA`, `MODELO`, `CANTIDAD`, `PROVEEDOR`, `PRECIO`, `CATEGORIA`) VALUES
-(4, 'Laptop', 'Dell', 'Alienware', 2, 'Proveedor', 10000, 'Laptop');
+(4, '12AB', 'Dell', 'Laptop Alienware', 2, 'Proveedor', 10000, 'Laptop');
 
 -- --------------------------------------------------------
 
@@ -124,6 +139,13 @@ CREATE TABLE `vendedor` (
   `FECHADENACIMIENTOVR` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `vendedor`
+--
+
+INSERT INTO `vendedor` (`IDVR`, `NOMBREVR`, `CIVR`, `DIRECCIONVR`, `TELEFONOVR`, `CORREOELECTRONICOVR`, `FECHADENACIMIENTOVR`) VALUES
+(1, 'Carlos Fernandez', '12404300', 'Calle El Paraiso', 4455787, 'carlosf@gmail.com', '01-05-1999');
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +158,13 @@ CREATE TABLE `vendedorlogin` (
   `USUARIOLOGINVR` varchar(20) NOT NULL,
   `CONTRASENIALOGINVR` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `vendedorlogin`
+--
+
+INSERT INTO `vendedorlogin` (`IDLOGINVR`, `IDVR`, `USUARIOLOGINVR`, `CONTRASENIALOGINVR`) VALUES
+(1, 1, 'CarlosF', '1234');
 
 --
 -- Índices para tablas volcadas
@@ -198,7 +227,7 @@ ALTER TABLE `datostienda`
 -- AUTO_INCREMENT de la tabla `descuento`
 --
 ALTER TABLE `descuento`
-  MODIFY `idDesc` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
