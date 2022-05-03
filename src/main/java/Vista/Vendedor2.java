@@ -5,9 +5,14 @@
 package Vista;
 import Modelo.Vendedor;
 import Modelo.VendedorBD;
+import Modelo.conexion2;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ZenBook
@@ -17,6 +22,9 @@ public class Vendedor2 extends javax.swing.JFrame {
      private VendedorBD vendedorBD= new VendedorBD();
      private MsgCamposVacios2 msgCamposVacios = new MsgCamposVacios2();
      private MsgRegistroExitoso msgRegistroExitoso = new MsgRegistroExitoso();
+     DefaultTableModel model;
+    Connection conn;
+    Statement sent;
     /**
      * Creates new form Vendedor2
      */
@@ -29,6 +37,81 @@ public class Vendedor2 extends javax.swing.JFrame {
         txtCorreo.setBackground(new java.awt.Color(0,0,0,1));
         txtNacimiento.setBackground(new java.awt.Color(0,0,0,1));
     }
+    
+     void Llenar(){
+        try {
+            conn = conexion2.getConnection();
+            String[]titulos = {"NOMBRE", "CI", "DIRECCIÓN", "TELÉFONO", "CORREO", "FEC NAC"}; 
+            String sql = "select * from vendedor";
+            model = new DefaultTableModel(null, titulos);
+            sent= conn.createStatement();
+            ResultSet rs=sent.executeQuery(sql);
+            String[]fila = new String[6];
+            while(rs.next()){
+                fila[0]=rs.getString("NOMBREVR");
+                fila[1]=rs.getString("CIVR");
+                fila[2]=rs.getString("DIRECCIONVR");
+                fila[3]=rs.getString("TELEFONOVR");
+                fila[4]=rs.getString("CORREOELECTRONICOVR");
+                fila[5]=rs.getString("FECHADENACIMIENTOVR");
+                model.addRow(fila);
+            }
+            txtabla.setModel(model);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    void Limpiar(){
+        txtNombre.setText("");
+        txtCI.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtNacimiento.setText("");
+    }
+     /*
+    public void verificarPlato(){
+        int res = 0;
+           try{
+            String ci =txtCI.getText();
+            String query="select * from vendedor where civr= '"+ci+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()){
+                res = 1;
+                
+                if(res == 1){
+                    
+                    JOptionPane.showMessageDialog(null,"Este plato ya fue registrado! Revise la base de datos","error",JOptionPane.ERROR_MESSAGE);
+            }
+            }
+           }catch (Exception e){
+               
+            JOptionPane.showMessageDialog(null, "Plato registrado");
+        }
+}*/
+    public void insertarDatos(){
+        if(!"".equals(txtNombre.getText())|| !"".equals(txtCI.getText()) || !"".equals(txtTelefono.getText())|| !"".equals(txtDireccion.getText())|| !"".equals(txtCorreo.getText())||!"".equals(txtNacimiento.getText()))
+       { 
+        
+         vendedor.setCi(txtCI.getText());
+         vendedor.setNombre(txtNombre.getText());
+         vendedor.setDireccion(txtDireccion.getText());
+         vendedor.setTelefono(Integer.parseInt(txtTelefono.getText()));
+         vendedor.setCorreo(txtCorreo.getText());
+         vendedor.setNacimiento(txtNacimiento.getText());
+         vendedorBD.registrarVendedor(vendedor);
+         //msgRegistroExitoso.setVisible(true);
+         //this.dispose();
+//       insertarDatos();
+         
+       }  else{
+             JOptionPane.showMessageDialog(null, "Debe llenar los campos","error",JOptionPane.ERROR_MESSAGE);
+            
+        }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +150,7 @@ public class Vendedor2 extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtabla = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -156,7 +240,7 @@ public class Vendedor2 extends javax.swing.JFrame {
                 btnGuardarVendedorActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+        jPanel1.add(btnGuardarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -164,13 +248,13 @@ public class Vendedor2 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemFolder_256x256_icon-icons.com_76749.png"))); // NOI18N
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,6 +320,14 @@ public class Vendedor2 extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 420, 240));
 
+        txtBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscarIcono.png"))); // NOI18N
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 50, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editado.jpeg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 450));
 
@@ -278,28 +370,59 @@ public class Vendedor2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnGuardarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVendedorActionPerformed
-       if(!"".equals(txtNombre.getText())|| !"".equals(txtCI.getText()) || !"".equals(txtTelefono.getText())|| !"".equals(txtDireccion.getText())|| !"".equals(txtCorreo.getText())||!"".equals(txtNacimiento.getText()))
-       { 
-        
-         vendedor.setCi(txtCI.getText());
-         vendedor.setNombre(txtCI.getText());
-         vendedor.setDireccion(txtCI.getText());
-         vendedor.setTelefono(Integer.parseInt(txtCI.getText()));
-         vendedor.setCorreo(txtCI.getText());
-         vendedor.setNacimiento(txtNacimiento.getText());
-         vendedorBD.registrarVendedor(vendedor);
-         msgRegistroExitoso.setVisible(true);
-         this.dispose();
-         
-       }else{
-           msgCamposVacios.setVisible(true);
-           this.dispose();
-       }      
-    }//GEN-LAST:event_btnGuardarVendedorActionPerformed
+        int res = 0;
+           try{
+            String ci =txtCI.getText();
+            String query="select * from vendedor where civr= '"+ci+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
 
+            if (rs.next()){
+                res = 1;
+               // if(res == 1){
+                    JOptionPane.showMessageDialog(null,"Este vendedor ya fue registrado! Revise la base de datos","error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                 insertarDatos(); 
+                 Llenar();
+                    JOptionPane.showMessageDialog(null, "Vendedor registrado");
+               
+            }
+           }catch (Exception e){
+            Limpiar();
+            Llenar();
+            JOptionPane.showMessageDialog(null, "Debe llenar los campos vacíos!","error",JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnGuardarVendedorActionPerformed
+        
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        int res = 0;
+           try{
+            String ci =txtCI.getText();
+            String nom = txtNombre.getText();
+            String query="select * from vendedor where civr= '"+ci+"'or nombrevr='"+nom+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()){
+                res = 1;Llenar();
+                JOptionPane.showMessageDialog(null, "Vendedor encontrado");
+                Llenar();
+            }else{
+                 Llenar();
+                 JOptionPane.showMessageDialog(null,"Este vendedor no existe. Registrelo en la base de datos","error",JOptionPane.ERROR_MESSAGE);
+            }
+
+            }catch (Exception e){
+                 JOptionPane.showMessageDialog(null, "Debe colocar el nombre o el CI para iniciar la búsqueda","error",JOptionPane.ERROR_MESSAGE);
+                 Limpiar();
+                 Llenar();
+                    }
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,6 +483,7 @@ public class Vendedor2 extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JButton txtBuscar;
     private javax.swing.JTextField txtCI;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
