@@ -42,6 +42,24 @@ public class ProductoGUI extends javax.swing.JFrame {
         }
         tablaProductos.setModel(modelo);
     }
+    private void listarProductosCategoria(){
+        ArrayList<Producto> listaProductos=new ArrayList();
+        listaProductos=productoBD.listarProductosCategoria(textCategoria.getText());
+        modelo=(DefaultTableModel) tablaProductos.getModel();
+        Object[] ob = new Object[8];
+        for(int i=0; i<listaProductos.size(); i++){
+            ob[0]=listaProductos.get(i).getId();
+            ob[1]=listaProductos.get(i).getCodigo();
+            ob[2]=listaProductos.get(i).getMarca();
+            ob[3]=listaProductos.get(i).getModelo();
+            ob[4]=listaProductos.get(i).getCantidad();
+            ob[5]=listaProductos.get(i).getProveedor();
+            ob[6]=listaProductos.get(i).getPrecio();
+            ob[7]=listaProductos.get(i).getCategoria();
+            modelo.addRow(ob);
+        }
+        tablaProductos.setModel(modelo);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,8 +81,8 @@ public class ProductoGUI extends javax.swing.JFrame {
         tablaProductos = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
+        btnFiltrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JPanel();
@@ -142,16 +160,21 @@ public class ProductoGUI extends javax.swing.JFrame {
         });
         jPanel2.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRefrescarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        jPanel2.add(btnRefrescar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_file_files_documents_icon_153885.png"))); // NOI18N
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_file_files_documents_icon_153885.png"))); // NOI18N
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemFolder_256x256_icon-icons.com_76749.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -251,9 +274,11 @@ public class ProductoGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        limpiarTabla();
+        listarProductos();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
        menuPrincipal=new MenuPrincipal();
@@ -290,6 +315,14 @@ public class ProductoGUI extends javax.swing.JFrame {
                 textCodigo.requestFocus();
             }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        if(!"".equals(textCategoria.getText())){
+            limpiarTabla();
+            listarProductosCategoria();
+        }   
+    }//GEN-LAST:event_btnFiltrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,10 +365,10 @@ public class ProductoGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAtras;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnFiltrar;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<Object> cBoxProveedor;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

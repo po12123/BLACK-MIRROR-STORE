@@ -19,14 +19,14 @@ public class ConfigTiendaDao {
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean ActualizarTienda(ConfigTienda ctl){
+    public boolean ActualizarTienda(ConfigTienda ct1){
        String sql = "UPDATE datostienda SET NombreTienda=?,Nit=? , TelefonoT=?, DireccionT=?,RazonSocial=?  WHERE id=?";
        try {
            ps = con.prepareStatement(sql);   
-           ps.setString(1, ct1.getNombreT());
+           ps.setString(1, ct1.getNombre());
            ps.setString(2, ct1.getNit());
-           ps.setString(3, ct1.getTelefonoT());
-           ps.setString(4, ct1.getDireccionT());
+           ps.setString(3, ct1.getTelefono());
+           ps.setString(4, ct1.getDireccion());
            ps.setString(5, ct1.getMensaje());
            ps.execute();
            return true;
