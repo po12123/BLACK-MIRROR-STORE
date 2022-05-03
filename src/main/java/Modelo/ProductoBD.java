@@ -37,7 +37,7 @@ public class ProductoBD {
         return res;
     }
     public boolean ModificarProductos(Producto pro){
-    String sql="UPDATE producto SET CODIGO=?, MARCA=?, MODELO=?, CANTIDAD=?, PROVEEDOR=?, PRECIO=?, CATEGORIA=? WHERE CODIGO=? ";
+    String sql="UPDATE producto SET CODIGO=?, MARCA=?, MODELO=?, CANTIDAD=?, PROVEEDOR=?, PRECIO=?, CATEGORIA=? WHERE ID=? ";
        
         try {
             ps = con.prepareStatement(sql);
@@ -48,6 +48,7 @@ public class ProductoBD {
             ps.setString(5, pro.getProveedor());
             ps.setInt(6, pro.getPrecio());
             ps.setString(7, pro.getCategoria());
+            ps.setInt(8, pro.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
