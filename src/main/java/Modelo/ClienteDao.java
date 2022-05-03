@@ -75,4 +75,28 @@ public class ClienteDao {
         }
         return listaClientes;
     }
+    
+    public boolean ModificarCliente(Cliente cl){
+        
+        String sql="UPDATE cliente SET CICLI=?, NOMBRECLI=?, TELEFONOCLI=?, DIRECCIONCLI=?  WHERE CICLI=? ";
+       
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cl.getCi());
+            ps.setString(2, cl.getNombre());
+            ps.setInt(3, cl.getTelefono());
+            ps.setString(4, cl.getDireccion());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+    }
 }

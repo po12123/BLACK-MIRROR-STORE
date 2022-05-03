@@ -69,7 +69,13 @@ public class registro_clientes extends javax.swing.JFrame {
         for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
             i = i - 1;
-        }
+        }    
+    }
+    private void limpiarCliente(){
+        jCiTextField.setText("");
+        jNombreTextField.setText("");
+        jTelefonoTextField.setText("");
+        jDireccionTextField.setText("");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,7 +89,7 @@ public class registro_clientes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jActualizarButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jDireccionTextField = new javax.swing.JTextField();
@@ -144,10 +150,20 @@ public class registro_clientes extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
+        jActualizarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
+        jActualizarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jActualizarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jActualizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SystemFolder_256x256_icon-icons.com_76749.png"))); // NOI18N
@@ -188,6 +204,7 @@ public class registro_clientes extends javax.swing.JFrame {
             b.setVisible(true);
             cl = new Cliente();
             limpiarTabla();
+            limpiarCliente();
             listarClientes();
             
         }else{
@@ -200,6 +217,30 @@ public class registro_clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         buscarCliente(evt);
     }//GEN-LAST:event_jCiTextFieldKeyPressed
+
+    private void jActualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarButtonActionPerformed
+        if("".equals(jCiTextField.getText())){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }else{
+            if(!"".equals(jCiTextField.getText()) || !"".equals(jNombreTextField.getText()) || !"".equals(jTelefonoTextField.getText()) || !"".equals(jDireccionTextField.getText())){
+                cl.setCi(Integer.parseInt(jCiTextField.getText()));
+                cl.setNombre(jNombreTextField.getText());
+                cl.setTelefono(Integer.parseInt(jTelefonoTextField.getText()));
+                cl.setDireccion(jDireccionTextField.getText());
+                cliente.ModificarCliente(cl);
+                limpiarTabla();
+                limpiarCliente();
+                listarClientes();
+            }else{
+                MsgCamposVacios2 a = new MsgCamposVacios2();
+                a.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jActualizarButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiarCliente();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,7 +279,7 @@ public class registro_clientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jActualizarButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
