@@ -79,4 +79,26 @@ public class ProveedorDao {
        }
        return Listapr;
    }
-}
+   public boolean ModificarProveedor(Proveedor pr){
+       String sql = "UPDATE proveedor SET CIPR=?, NOMBREPR=?, TELEFONOPR=?, DIRECCIONPR=? WHERE CIPR=?";
+       try{
+           con=cn.conectar();
+           ps = con.prepareStatement(sql);
+           ps.setInt(1, pr.getCi());
+           ps.setString(2, pr.getNombre());
+           ps.setInt(3, pr.getTelefono());
+           ps.setString(4, pr.getDireccion());
+           ps.setInt(5, pr.getCi());
+           ps.execute();
+           return true;
+       }catch(SQLException e){
+           System.out.println(e.toString());
+           return false;
+       }finally{
+           try {
+               con.close();
+           } catch (SQLException e) {
+               System.out.println(e.toString());
+           }
+       }
+}}

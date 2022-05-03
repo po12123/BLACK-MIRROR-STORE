@@ -17,6 +17,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
     private MenuPrincipal menuPrincipal;
     public ProveedorGUI() {
         initComponents();
+        ListarProveedor();
     }
 
     public void LimpiarTable(){
@@ -126,29 +127,10 @@ public class ProveedorGUI extends javax.swing.JFrame {
         TableProveedor.setBackground(new java.awt.Color(58, 122, 241));
         TableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Id", "CI", "Nombre", "Telefono", "Direccion"
+                "CI", "Nombre", "Telefono", "Direccion"
             }
         ));
         TableProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,9 +139,6 @@ public class ProveedorGUI extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TableProveedor);
-        if (TableProveedor.getColumnModel().getColumnCount() > 0) {
-            TableProveedor.getColumnModel().getColumn(0).setPreferredWidth(20);
-        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 440, 340));
 
@@ -183,6 +162,11 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         btnAtras.setBackground(new java.awt.Color(255, 51, 153));
@@ -295,6 +279,29 @@ public class ProveedorGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
         }
     }//GEN-LAST:event_jEliminarButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      if("".equals(jCiTextField.getText())){
+            JOptionPane.showMessageDialog(null,"Selecciona una fila");
+        }else{
+            if (!"".equals(jNombreTextField.getText()) || !"".equals(jCiTextField.getText())
+                    || !"".equals(jDireccionTextField.getText()) 
+                    || !"".equals(jTelefonoTextField.getText())){
+                pr.setCi(Integer.parseInt(jCiTextField.getText()));
+                pr.setNombre(jNombreTextField.getText());
+                pr.setTelefono(Integer.parseInt(jTelefonoTextField.getText()));
+                pr.setDireccion(jDireccionTextField.getText());
+                pr.setCi(Integer.parseInt(jCiTextField.getText()));
+                PrDao.ModificarProveedor(pr);
+                LimpiarTable();
+                ListarProveedor();
+                LimpiarProveedor();
+                MsgRegistroExitoso b = new MsgRegistroExitoso();
+                b.setVisible(true);
+                pr = new Proveedor();  
+        }
+      }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
