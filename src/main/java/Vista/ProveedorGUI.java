@@ -3,6 +3,8 @@ package Vista;
 import Modelo.ProveedorDao;
 import Modelo.Proveedor;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +30,19 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jNombreTextField.setText("");
         jTelefonoTextField.setText("");
         jDireccionTextField.setText("");
+    }
+    private void ListarProveedor(){
+        List<Proveedor> listarPr = PrDao.ListarProveedor();
+        modelo=(DefaultTableModel) TableProveedor.getModel();
+        Object[] ob = new Object[4];
+        for(int i=0; i < listarPr.size(); i++){
+            ob[0]=listarPr.get(i).getCi();
+            ob[1]=listarPr.get(i).getNombre();
+            ob[2]=listarPr.get(i).getTelefono();
+            ob[3]=listarPr.get(i).getDireccion();
+            modelo.addRow(ob);
+        }
+        TableProveedor.setModel(modelo);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -111,29 +126,29 @@ public class ProveedorGUI extends javax.swing.JFrame {
         TableProveedor.setBackground(new java.awt.Color(58, 122, 241));
         TableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "CI", "Nombre", "Telefono", "Direccion"
+                "Id", "CI", "Nombre", "Telefono", "Direccion"
             }
         ));
         TableProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +157,9 @@ public class ProveedorGUI extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TableProveedor);
+        if (TableProveedor.getColumnModel().getColumnCount() > 0) {
+            TableProveedor.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 440, 340));
 
@@ -245,6 +263,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
             b.setVisible(true);
             pr = new Proveedor();
             LimpiarTable();
+            ListarProveedor();
             LimpiarProveedor();
             
         }else{
@@ -269,6 +288,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
                 int ci = Integer.parseInt(jCiTextField.getText());
                 PrDao.eliminarProveedor(ci);
                 LimpiarTable();
+                ListarProveedor();
                 LimpiarProveedor();
             }
         }else{
