@@ -60,6 +60,51 @@ public class ProductoGUI extends javax.swing.JFrame {
         }
         tablaProductos.setModel(modelo);
     }
+    private void registrarProducto(){
+        if(!"".equals(textCodigo.getText()) || !"".equals(textMarca.getText()) ||
+            !"".equals(textModelo.getText()) ||!"".equals(textCantidad1.getText()) ||
+            !"".equals(cBoxProveedor.getSelectedItem()) ||
+            !"".equals(textPrecio.getText()) || !"".equals(textCategoria.getText()))
+        {
+            producto.setCodigo(textCodigo.getText());
+            producto.setMarca(textMarca.getText());
+            producto.setModelo(textModelo.getText());
+            producto.setCantidad(Integer.parseInt(textCantidad1.getText()));
+            Combo item=(Combo)cBoxProveedor.getSelectedItem();
+            producto.setProveedor(item.getNombre());
+            producto.setPrecio(Integer.parseInt(textPrecio.getText()));
+            producto.setCategoria(textCategoria.getText());
+            if(productoBD.registrarProducto(producto)){
+                System.out.println("Producto registrado");
+                limpiarTabla();
+                listarProductos();
+            }else{
+                System.out.println("Producto no registrado");
+            }
+        }else{
+            System.out.println("Campos vacios");
+        } 
+    }
+    private void buscarProducto(){
+        if (!"".equals(textCodigo.getText())) {
+                String codigo = textCodigo.getText();
+                producto = productoBD.buscarProducto(codigo);
+                if (producto.getCodigo()!= null) {
+                    textMarca.setText("" + producto.getMarca());
+                    textModelo.setText("" + producto.getModelo());
+                    textCantidad1.setText("" + producto.getCantidad());
+                    cBoxProveedor.addItem(new Combo(1, producto.getProveedor()));   
+                    textPrecio.setText("" + producto.getPrecio());
+                    textCategoria.setText("" + producto.getCategoria());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe el producto: "+textCodigo.getText());
+                    textCodigo.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del productos");
+                textCodigo.requestFocus();
+            }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,7 +126,7 @@ public class ProductoGUI extends javax.swing.JFrame {
         tablaProductos = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
-        btnRefrescar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnFiltrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
@@ -160,13 +205,13 @@ public class ProductoGUI extends javax.swing.JFrame {
         });
         jPanel2.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
-        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
-        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefrescarActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRefrescar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        jPanel2.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_file_files_documents_icon_153885.png"))); // NOI18N
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -238,29 +283,7 @@ public class ProductoGUI extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        if(!"".equals(textCodigo.getText()) || !"".equals(textMarca.getText()) ||
-            !"".equals(textModelo.getText()) ||!"".equals(textCantidad1.getText()) ||
-            !"".equals(cBoxProveedor.getSelectedItem()) ||
-            !"".equals(textPrecio.getText()) || !"".equals(textCategoria.getText()))
-        {
-            producto.setCodigo(textCodigo.getText());
-            producto.setMarca(textMarca.getText());
-            producto.setModelo(textModelo.getText());
-            producto.setCantidad(Integer.parseInt(textCantidad1.getText()));
-            Combo item=(Combo)cBoxProveedor.getSelectedItem();
-            producto.setProveedor(item.getNombre());
-            producto.setPrecio(Integer.parseInt(textPrecio.getText()));
-            producto.setCategoria(textCategoria.getText());
-            if(productoBD.registrarProducto(producto)){
-                System.out.println("Producto registrado");
-                limpiarTabla();
-                listarProductos();
-            }else{
-                System.out.println("Producto no registrado");
-            }
-        }else{
-            System.out.println("Campos vacios");
-        }    
+        registrarProducto();   
     }//GEN-LAST:event_btnRegistrarActionPerformed
     
     private void limpiarTabla(){
@@ -274,11 +297,29 @@ public class ProductoGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        limpiarTabla();
-        listarProductos();
-    }//GEN-LAST:event_btnRefrescarActionPerformed
+        if("".equals(textCodigo.getText())){
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }else{
+            if(!"".equals(textCodigo.getText()) || !"".equals(textMarca.getText()) ||
+            !"".equals(textModelo.getText()) ||!"".equals(textCantidad1.getText()) ||
+            !"".equals(cBoxProveedor.getSelectedItem()) ||
+            !"".equals(textPrecio.getText()) || !"".equals(textCategoria.getText())){
+                producto.setCodigo(textCodigo.getText());
+                producto.setMarca(textMarca.getText());
+                producto.setModelo(textModelo.getText());
+                producto.setCantidad(Integer.parseInt(textCantidad1.getText()));
+                producto.setProveedor(cBoxProveedor.getSelectedItem().toString());
+                producto.setPrecio(Integer.parseInt(textPrecio.getText()));
+                producto.setCategoria(textCategoria.getText());
+                productoBD.ModificarProductos(producto);
+                JOptionPane.showMessageDialog(null, "Producto Modificado");
+                limpiarTabla();
+                listarProductos();
+            }
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
        menuPrincipal=new MenuPrincipal();
@@ -296,24 +337,7 @@ public class ProductoGUI extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        if (!"".equals(textCodigo.getText())) {
-                String codigo = textCodigo.getText();
-                producto = productoBD.buscarProducto(codigo);
-                if (producto.getCodigo()!= null) {
-                    textMarca.setText("" + producto.getMarca());
-                    textModelo.setText("" + producto.getModelo());
-                    textCantidad1.setText("" + producto.getCantidad());
-                    cBoxProveedor.addItem(new Combo(1, producto.getProveedor()));   
-                    textPrecio.setText("" + producto.getPrecio());
-                    textCategoria.setText("" + producto.getCategoria());
-                } else {
-                    JOptionPane.showMessageDialog(null, "No existe el producto: "+textCodigo.getText());
-                    textCodigo.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del productos");
-                textCodigo.requestFocus();
-            }
+        buscarProducto();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
@@ -363,10 +387,10 @@ public class ProductoGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JPanel btnAtras;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFiltrar;
-    private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<Object> cBoxProveedor;
     private javax.swing.JButton jButton4;
