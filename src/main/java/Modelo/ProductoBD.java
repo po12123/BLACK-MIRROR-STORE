@@ -85,6 +85,31 @@ public class ProductoBD {
         }
         return listaProductos;
     }
+    public ArrayList<Producto> listarProductosCategoria(String categoria){
+        ArrayList<Producto> listaProductos=new ArrayList();
+        String sql="SELECT * FROM producto WHERE CATEGORIA = ?"; 
+        try {
+            con = cn.conectar();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, categoria);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Producto pro=new Producto();
+                pro.setId(rs.getInt(1));
+                pro.setCodigo(rs.getString(2));
+                pro.setMarca(rs.getString(3));
+                pro.setModelo(rs.getString(4));
+                pro.setCantidad(rs.getInt(5));
+                pro.setProveedor(rs.getString(6));
+                pro.setPrecio(rs.getInt(7));
+                pro.setCategoria(rs.getString(8));
+                listaProductos.add(pro);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en listar producto por categoria: "+e.toString());
+        }
+        return listaProductos;
+    }
     public Producto buscarProducto(String codigo){
         Producto pro=new Producto();
         String sql="SELECT * FROM producto WHERE CODIGO = ?";
@@ -108,4 +133,5 @@ public class ProductoBD {
         }
         return pro;
     }
+    
 }
