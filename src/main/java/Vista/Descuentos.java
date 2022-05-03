@@ -4,6 +4,14 @@
  */
 package Vista;
 
+import Modelo.Conexion;
+import Modelo.Descuento;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 
 /**
  *
@@ -14,7 +22,8 @@ public class Descuentos extends javax.swing.JFrame {
     /**
      * Creates new form Producto
      */
-    
+    private Conexion cn = new Conexion();
+    private Connection con=cn.conectar();
     public Descuentos() {
         
         initComponents();
@@ -37,7 +46,6 @@ public class Descuentos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -46,11 +54,12 @@ public class Descuentos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -85,7 +94,6 @@ public class Descuentos extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Modelo:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 146, -1, -1));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 142, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,15 +164,15 @@ public class Descuentos extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 80, 570, 351));
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 416, -1, -1));
-        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 186, 142, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Save_37110.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Save_37110.png"))); // NOI18N
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 140, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buscarIcono.png"))); // NOI18N
         jButton2.setBorderPainted(false);
@@ -186,6 +194,7 @@ public class Descuentos extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 50));
+        jPanel2.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 140, -1));
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -225,9 +234,22 @@ public class Descuentos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       String fechaIni =((JTextField)jfechaIni.getDateEditor().getUiComponent()).getText();
+       String fechaFin =((JTextField)jfechaFin.getDateEditor().getUiComponent()).getText();
+       Descuento desc=new Descuento(Date.valueOf(fechaIni),Date.valueOf(fechaFin));
+       try{
+           PreparedStatement ps=con.prepareStatement("INSERT INTO descuento(fechaIniDesc,fechaFinDesc) VALUES(?,?) ");
+           ps.setDate(1, (Date) desc.getFechaIni());
+           ps.setDate(2, (Date) desc.getFechaFin());
+           ps.executeUpdate();
+           System.out.println("Fecha:"+fechaIni);
+           System.out.println("Fecha:"+fechaFin);
+           JOptionPane.showMessageDialog(null, "Datos guardados correctamente");
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se puede registrar");
+       }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -284,11 +306,13 @@ public class Descuentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -304,10 +328,8 @@ public class Descuentos extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
     
 }
