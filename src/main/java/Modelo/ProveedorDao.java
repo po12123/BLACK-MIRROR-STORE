@@ -34,4 +34,24 @@ public class ProveedorDao {
        }
    
    }
+   
+   public boolean eliminarProveedor(int ci){
+       String sql = "DELETE FROM proveedor WHERE CIPR=?";
+       try {
+           con = cn.conectar();
+           ps = con.prepareStatement(sql);
+           ps.setInt(1, ci);
+           ps.execute();
+           return true;
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+           return false;
+       }finally{
+           try {
+               con.close();
+           } catch (SQLException e) {
+               System.out.println(e.toString());
+           }
+       }
+   }
 }
