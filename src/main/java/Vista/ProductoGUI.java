@@ -6,6 +6,7 @@ import Modelo.Producto;
 import Modelo.ProductoBD;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductoGUI extends javax.swing.JFrame {
@@ -61,11 +62,11 @@ public class ProductoGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -125,7 +126,7 @@ public class ProductoGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Marca", "Modelo", "Cantidad", "Proveedor", "Precio", "Categoria"
+                "ID", "Codigo", "Marca", "Modelo", "Cantidad", "Proveedor", "Precio", "Categoria"
             }
         ));
         jScrollPane1.setViewportView(tablaProductos);
@@ -133,13 +134,13 @@ public class ProductoGUI extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 70, 480, 330));
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 416, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Save_37110.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Save_37110.png"))); // NOI18N
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jPanel2.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -160,8 +161,13 @@ public class ProductoGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 50));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/new_page_document_16676.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 50));
 
         btnAtras.setBackground(new java.awt.Color(255, 51, 153));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -207,7 +213,7 @@ public class ProductoGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         if(!"".equals(textCodigo.getText()) || !"".equals(textMarca.getText()) ||
             !"".equals(textModelo.getText()) ||!"".equals(textCantidad1.getText()) ||
@@ -232,7 +238,7 @@ public class ProductoGUI extends javax.swing.JFrame {
         }else{
             System.out.println("Campos vacios");
         }    
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
     
     private void limpiarTabla(){
         for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -262,6 +268,28 @@ public class ProductoGUI extends javax.swing.JFrame {
     private void btnAtrasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseExited
         btnAtras.setBackground(new Color(255,51,153));
     }//GEN-LAST:event_btnAtrasMouseExited
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        if (!"".equals(textCodigo.getText())) {
+                String codigo = textCodigo.getText();
+                producto = productoBD.buscarProducto(codigo);
+                if (producto.getCodigo()!= null) {
+                    textMarca.setText("" + producto.getMarca());
+                    textModelo.setText("" + producto.getModelo());
+                    textCantidad1.setText("" + producto.getCantidad());
+                    cBoxProveedor.addItem(new Combo(1, producto.getProveedor()));   
+                    textPrecio.setText("" + producto.getPrecio());
+                    textCategoria.setText("" + producto.getCategoria());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe el producto: "+textCodigo.getText());
+                    textCodigo.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del productos");
+                textCodigo.requestFocus();
+            }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,12 +331,12 @@ public class ProductoGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAtras;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<Object> cBoxProveedor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
