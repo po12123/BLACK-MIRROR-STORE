@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +22,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
     Statement sent;
     public ProveedorGUI() {
         initComponents();
+        ListarProveedor();
     }
 
     public void LimpiarTable(){
@@ -33,6 +36,19 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jNombreTextField.setText("");
         jTelefonoTextField.setText("");
         jDireccionTextField.setText("");
+    }
+    private void ListarProveedor(){
+        List<Proveedor> listarPr = PrDao.ListarProveedor();
+        modelo=(DefaultTableModel) TableProveedor.getModel();
+        Object[] ob = new Object[4];
+        for(int i=0; i < listarPr.size(); i++){
+            ob[0]=listarPr.get(i).getCi();
+            ob[1]=listarPr.get(i).getNombre();
+            ob[2]=listarPr.get(i).getTelefono();
+            ob[3]=listarPr.get(i).getDireccion();
+            modelo.addRow(ob);
+        }
+        TableProveedor.setModel(modelo);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,26 +133,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
         TableProveedor.setBackground(new java.awt.Color(58, 122, 241));
         TableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "CI", "Nombre", "Telefono", "Direccion"
@@ -171,6 +168,11 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_refresh_15732.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
         btnAtras.setBackground(new java.awt.Color(255, 51, 153));
@@ -259,6 +261,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
             b.setVisible(true);
             pr = new Proveedor();
             LimpiarTable();
+            ListarProveedor();
             LimpiarProveedor();
             
         }else{
@@ -283,6 +286,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
                 int ci = Integer.parseInt(jCiTextField.getText());
                 PrDao.eliminarProveedor(ci);
                 LimpiarTable();
+                ListarProveedor();
                 LimpiarProveedor();
             }
         }else{
@@ -313,6 +317,28 @@ public class ProveedorGUI extends javax.swing.JFrame {
     }                                         
 
     }//GEN-LAST:event_jBuscarActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      if("".equals(jCiTextField.getText())){
+            JOptionPane.showMessageDialog(null,"Selecciona una fila");
+        }else{
+            if (!"".equals(jNombreTextField.getText()) || !"".equals(jCiTextField.getText())
+                    || !"".equals(jDireccionTextField.getText()) 
+                    || !"".equals(jTelefonoTextField.getText())){
+                pr.setCi(Integer.parseInt(jCiTextField.getText()));
+                pr.setNombre(jNombreTextField.getText());
+                pr.setTelefono(Integer.parseInt(jTelefonoTextField.getText()));
+                pr.setDireccion(jDireccionTextField.getText());
+                pr.setCi(Integer.parseInt(jCiTextField.getText()));
+                PrDao.ModificarProveedor(pr);
+                LimpiarTable();
+                ListarProveedor();
+                LimpiarProveedor();
+                MsgRegistroExitoso b = new MsgRegistroExitoso();
+                b.setVisible(true);
+                pr = new Proveedor();  
+        }
+      }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
