@@ -309,7 +309,7 @@ public class ProveedorGUI extends javax.swing.JFrame {
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
                int res = 0;
            try{
-            String nom = jNombreTextField.getText();
+            String nom = txtNombre.getText();
             String query="select * from proveedor where nombrepr='"+nom+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
