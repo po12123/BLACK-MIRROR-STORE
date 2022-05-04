@@ -18,8 +18,12 @@ public class ProveedorGUI extends javax.swing.JFrame {
     ProveedorDao PrDao = new ProveedorDao();
     DefaultTableModel modelo = new DefaultTableModel();
     private MenuPrincipal menuPrincipal;
+//<<<<<<< proveedor
     Connection conn;
     Statement sent;
+//=======
+    private MsgDatosIncorrectos2 msgInco;
+//>>>>>>> develop
     public ProveedorGUI() {
         initComponents();
         ListarProveedor();
@@ -32,9 +36,9 @@ public class ProveedorGUI extends javax.swing.JFrame {
         }
     }
     private void LimpiarProveedor(){
-        jCiTextField.setText("");
-        jNombreTextField.setText("");
-        jTelefonoTextField.setText("");
+        txtCi.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
         jDireccionTextField.setText("");
     }
     private void ListarProveedor(){
@@ -59,10 +63,10 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jNombreTextField = new javax.swing.JTextField();
-        jCiTextField = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCi = new javax.swing.JTextField();
         jDireccionTextField = new javax.swing.JTextField();
-        jTelefonoTextField = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableProveedor = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -101,19 +105,19 @@ public class ProveedorGUI extends javax.swing.JFrame {
         jLabel5.setText("Direccion:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        jNombreTextField.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNombreTextFieldActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(jNombreTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 160, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 160, -1));
 
-        jCiTextField.addActionListener(new java.awt.event.ActionListener() {
+        txtCi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCiTextFieldActionPerformed(evt);
+                txtCiActionPerformed(evt);
             }
         });
-        jPanel1.add(jCiTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, -1));
+        jPanel1.add(txtCi, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, -1));
 
         jDireccionTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,15 +126,14 @@ public class ProveedorGUI extends javax.swing.JFrame {
         });
         jPanel1.add(jDireccionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
 
-        jTelefonoTextField.addActionListener(new java.awt.event.ActionListener() {
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTelefonoTextFieldActionPerformed(evt);
+                txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTelefonoTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 160, -1));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 160, -1));
 
         TableProveedor.setAutoCreateRowSorter(true);
-        TableProveedor.setBackground(new java.awt.Color(58, 122, 241));
         TableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -219,21 +222,21 @@ public class ProveedorGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jNombreTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombreTextFieldActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jNombreTextFieldActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void jCiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCiTextFieldActionPerformed
+    private void txtCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCiTextFieldActionPerformed
+    }//GEN-LAST:event_txtCiActionPerformed
 
     private void jDireccionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDireccionTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jDireccionTextFieldActionPerformed
 
-    private void jTelefonoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTelefonoTextFieldActionPerformed
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTelefonoTextFieldActionPerformed
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
        menuPrincipal=new MenuPrincipal();
@@ -250,11 +253,19 @@ public class ProveedorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasMouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if (!"".equals(jNombreTextField.getText()) || !"".equals(jCiTextField.getText()) || !"".equals(jDireccionTextField.getText()) || !"".equals(jTelefonoTextField.getText())){
-            pr.setCi(Integer.parseInt(jCiTextField.getText()));
-            pr.setNombre(jNombreTextField.getText());
-            pr.setTelefono(Integer.parseInt(jTelefonoTextField.getText()));
+    
+     String ci=txtCi.getText();
+     String nombre=txtNombre.getText();
+     String telefono = txtTelefono.getText();
+    if(!(ci.matches("^[0-9]+$")||(nombre.matches("^[a-zA-Z\\s]+$"))||(telefono.matches("^[0-9]+$")))){
+          msgInco =new MsgDatosIncorrectos2();
+          msgInco.setVisible(true);
+          
+     }else{        
+        if (!"".equals(txtNombre.getText()) || !"".equals(txtCi.getText()) || !"".equals(jDireccionTextField.getText()) || !"".equals(txtTelefono.getText())){
+            pr.setCi(Integer.parseInt(txtCi.getText()));
+            pr.setNombre(txtNombre.getText());
+            pr.setTelefono(Integer.parseInt(txtTelefono.getText()));
             pr.setDireccion(jDireccionTextField.getText());
             PrDao.RegistrarProveedor(pr);
             MsgRegistroExitoso b = new MsgRegistroExitoso();
@@ -269,21 +280,22 @@ public class ProveedorGUI extends javax.swing.JFrame {
             a.setVisible(true);
             
         }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableProveedorMouseClicked
     int fila = TableProveedor.rowAtPoint(evt.getPoint());
-    jCiTextField.setText(TableProveedor.getValueAt(fila, 0).toString());
-    jNombreTextField.setText(TableProveedor.getValueAt(fila, 1).toString());
-    jTelefonoTextField.setText(TableProveedor.getValueAt(fila, 2).toString());
+    txtCi.setText(TableProveedor.getValueAt(fila, 0).toString());
+    txtNombre.setText(TableProveedor.getValueAt(fila, 1).toString());
+    txtTelefono.setText(TableProveedor.getValueAt(fila, 2).toString());
     jDireccionTextField.setText(TableProveedor.getValueAt(fila, 3).toString());
     }//GEN-LAST:event_TableProveedorMouseClicked
 
     private void jEliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarButtonActionPerformed
-        if(!"".equals(jCiTextField.getText())){
+        if(!"".equals(txtCi.getText())){
             int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de el;iminar");
             if(pregunta == 0){
-                int ci = Integer.parseInt(jCiTextField.getText());
+                int ci = Integer.parseInt(txtCi.getText());
                 PrDao.eliminarProveedor(ci);
                 LimpiarTable();
                 ListarProveedor();
@@ -318,17 +330,17 @@ public class ProveedorGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBuscarActionPerformed
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      if("".equals(jCiTextField.getText())){
+      if("".equals(txtCi.getText())){
             JOptionPane.showMessageDialog(null,"Selecciona una fila");
         }else{
-            if (!"".equals(jNombreTextField.getText()) || !"".equals(jCiTextField.getText())
+            if (!"".equals(txtNombre.getText()) || !"".equals(txtCi.getText())
                     || !"".equals(jDireccionTextField.getText()) 
-                    || !"".equals(jTelefonoTextField.getText())){
-                pr.setCi(Integer.parseInt(jCiTextField.getText()));
-                pr.setNombre(jNombreTextField.getText());
-                pr.setTelefono(Integer.parseInt(jTelefonoTextField.getText()));
+                    || !"".equals(txtTelefono.getText())){
+                pr.setCi(Integer.parseInt(txtCi.getText()));
+                pr.setNombre(txtNombre.getText());
+                pr.setTelefono(Integer.parseInt(txtTelefono.getText()));
                 pr.setDireccion(jDireccionTextField.getText());
-                pr.setCi(Integer.parseInt(jCiTextField.getText()));
+                pr.setCi(Integer.parseInt(txtCi.getText()));
                 PrDao.ModificarProveedor(pr);
                 LimpiarTable();
                 ListarProveedor();
@@ -383,7 +395,6 @@ public class ProveedorGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JTextField jCiTextField;
     private javax.swing.JTextField jDireccionTextField;
     private javax.swing.JButton jEliminarButton;
     private javax.swing.JLabel jLabel2;
@@ -392,11 +403,16 @@ public class ProveedorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jNombreTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+//<<<<<<< proveedor
     private javax.swing.JTextField jTelefonoTextField;
     private javax.swing.JLabel txBuscar;
+//=======
+    private javax.swing.JTextField txtCi;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
+//>>>>>>> develop
     // End of variables declaration//GEN-END:variables
     
 }

@@ -2,8 +2,8 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:33065
--- Tiempo de generación: 03-05-2022 a las 12:46:52
+-- Servidor: localhost:33065
+-- Tiempo de generación: 04-05-2022 a las 12:31:57
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -39,7 +39,11 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CICLI`, `NOMBRECLI`, `TELEFONOCLI`, `DIRECCIONCLI`) VALUES
-(1234001, 'Maria Reza', 4437899, 'Calle Los Cedros');
+(124050, 'Juan Pereira', 4455665, 'Calle Bolivar'),
+(1234001, 'Maria Reza', 4437899, 'Calle Los Cedros'),
+(1240400, 'Mario Rojas', 4455667, 'Calle Nispero'),
+(12404300, 'Romaria Lopez', 4460998, 'Calle los cedros'),
+(12404307, 'Juan Coca', 44332211, 'Calle Los Lirios');
 
 -- --------------------------------------------------------
 
@@ -61,7 +65,8 @@ CREATE TABLE `datostienda` (
 --
 
 INSERT INTO `datostienda` (`IDdatosTienda`, `NombreTienda`, `Nit`, `TelefonoT`, `DireccionT`, `RazonSocial`) VALUES
-(1, 'Black Mirror Store', '498999012', '498999', 'Calle Antezana #666, Cochabamba-Bolivia', 'Un sitio genial');
+(1, 'Black Mirror Store', '498999012', '498999', 'Calle Antezana #666, Cochabamba-Bolivia', 'Un sitio genial'),
+(2, 'Gav Sport', '13456288', '65773088', 'Ave Ramon Rivero', 'Gav Sport S.A');
 
 -- --------------------------------------------------------
 
@@ -83,8 +88,9 @@ CREATE TABLE `descuento` (
 --
 
 INSERT INTO `descuento` (`idDesc`, `fechaIniDesc`, `fechaFinDesc`, `codigoProd`, `nombreProd`, `descuento`) VALUES
-(1, '2022-05-04', '2022-05-27', 'Laptop', 'Alienware', 124),
-(2, '2022-05-02', '2022-05-28', '12AB', 'Laptop Alienware', 50);
+(4, '2022-05-04', '2022-05-31', '123W', 'Impresora Epson L380', 60),
+(5, '2022-05-04', '2022-05-31', '13JA', 'Laptop Asus Zenbook Pro', 20),
+(7, '2022-06-28', '2022-05-10', '13AS', 'Fotocopiadora HP Office jet Pro 15', 40);
 
 -- --------------------------------------------------------
 
@@ -108,7 +114,11 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`ID`, `CODIGO`, `MARCA`, `MODELO`, `CANTIDAD`, `PROVEEDOR`, `PRECIO`, `CATEGORIA`) VALUES
-(4, '12AB', 'Dell', 'Laptop Alienware', 2, 'Proveedor', 10000, 'Laptop');
+(4, '12AB', 'Dell', ' Alienware', 2, 'Proveedor', 10000, 'Laptop'),
+(7, '13JA', 'Asus', 'Zenbook Pro', 8, 'Proveedor', 9800, 'Laptop'),
+(9, '123W', 'Epson', 'L380', 10, 'Proveedor', 1500, 'Impresora'),
+(10, '13AS', 'HP', 'Office jet Pro 15', 24, 'Proveedor', 15000, 'Fotocopiadora'),
+(11, '133D', 'Sony', 'Bravia XR', 18, 'Proveedor', 6000, 'Televisor');
 
 -- --------------------------------------------------------
 
@@ -122,6 +132,15 @@ CREATE TABLE `proveedor` (
   `TELEFONOPR` int(11) NOT NULL,
   `DIRECCIONPR` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`CIPR`, `NOMBREPR`, `TELEFONOPR`, `DIRECCIONPR`) VALUES
+(2234650, 'Carlos Lopez', 4455660, 'Av Simon Lopez'),
+(2234657, 'Rina Arispe', 4434080, 'Av. Circunvalacion'),
+(97598800, 'Gonzalo Quinteros', 223456, 'Calle Madre Perla');
 
 -- --------------------------------------------------------
 
@@ -144,7 +163,9 @@ CREATE TABLE `vendedor` (
 --
 
 INSERT INTO `vendedor` (`IDVR`, `NOMBREVR`, `CIVR`, `DIRECCIONVR`, `TELEFONOVR`, `CORREOELECTRONICOVR`, `FECHADENACIMIENTOVR`) VALUES
-(1, 'Carlos Fernandez', '12404300', 'Calle El Paraiso', 4455787, 'carlosf@gmail.com', '01-05-1999');
+(1, 'Carlos Fernandez', '12404300', 'Calle El Paraiso', 4455787, 'carlosf@gmail.com', '01-05-1999'),
+(2, 'Melanie Paz', '12404311', 'Calle La Paz', 4455668, 'melanie@gmail.com', '01-08-1999'),
+(3, 'Fabio Gonzales Cespdes', '12408888', 'Calle Girasoles entre Valdivieso', 4455000, 'fabimelo@gmail.com', '01-08-2002');
 
 -- --------------------------------------------------------
 
@@ -164,7 +185,9 @@ CREATE TABLE `vendedorlogin` (
 --
 
 INSERT INTO `vendedorlogin` (`IDLOGINVR`, `IDVR`, `USUARIOLOGINVR`, `CONTRASENIALOGINVR`) VALUES
-(1, 1, 'CarlosF', '1234');
+(1, 1, 'CarlosF', '1234'),
+(2, 2, 'Mel', '123HA'),
+(3, 3, 'FabioG', '123ua');
 
 --
 -- Índices para tablas volcadas
@@ -221,19 +244,19 @@ ALTER TABLE `vendedorlogin`
 -- AUTO_INCREMENT de la tabla `datostienda`
 --
 ALTER TABLE `datostienda`
-  MODIFY `IDdatosTienda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IDdatosTienda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `descuento`
 --
 ALTER TABLE `descuento`
-  MODIFY `idDesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idDesc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedor`
@@ -245,7 +268,7 @@ ALTER TABLE `vendedor`
 -- AUTO_INCREMENT de la tabla `vendedorlogin`
 --
 ALTER TABLE `vendedorlogin`
-  MODIFY `IDLOGINVR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IDLOGINVR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

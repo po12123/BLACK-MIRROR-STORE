@@ -38,7 +38,7 @@ public class Descuentos extends javax.swing.JFrame {
     private ResultSet rs;
     private DefaultTableModel modelo;
     private MsgRegistroExitoso msgRegistroExitoso;
-    private MenuPrincipal  menu;
+    private MenuPrincipal  menuP;
     private Descuento descuento;
     public Descuentos() {  
         initComponents();
@@ -321,6 +321,8 @@ public class Descuentos extends javax.swing.JFrame {
     }//GEN-LAST:event_textCodigoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+     
+        
        String fechaIni =((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
        String fechaFin =((JTextField)jDateChooser2.getDateEditor().getUiComponent()).getText();
        Descuento desc=new Descuento();
@@ -375,7 +377,8 @@ public class Descuentos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuMouseExited
 
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
-       menu.setVisible(true);
+        MenuPrincipal menuP= new MenuPrincipal();
+        menuP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btnMenuMouseClicked
 
