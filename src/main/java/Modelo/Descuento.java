@@ -13,20 +13,20 @@ import java.sql.Date;
 public class Descuento {
     private int id;
     private String codigo;
-    private String modelo;
+    private String nombreProd;
     private Date fechaIni;
     private Date fechaFin;
-    private int precioDescuento;
+    private int porcentajeDescuento;
     public Descuento(){
         
     }
     public Descuento(int id, String codigo, String modelo, Date fechaIni, Date fechaFin, int precioDescuento){
         this.id=id;
         this.codigo=codigo;
-        this.modelo=modelo;
+        this.nombreProd=modelo;
         this.fechaIni=fechaIni;
         this.fechaFin=fechaFin;
-        this.precioDescuento=precioDescuento;
+        this.porcentajeDescuento=precioDescuento;
     }
 
     public int getId() {
@@ -45,20 +45,20 @@ public class Descuento {
         this.codigo = codigo;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getNombreProd() {
+        return nombreProd;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setNombreProd(String nombreProd) {
+        this.nombreProd = nombreProd;
     }
 
-    public int getPrecioDescuento() {
-        return precioDescuento;
+    public int getPorcentajeDescuento() {
+        return porcentajeDescuento;
     }
 
-    public void setPrecioDescuento(int precioDescuento) {
-        this.precioDescuento = precioDescuento;
+    public void setPorcentajeDescuento(int porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
     }
     
      public Date getFechaFin(){

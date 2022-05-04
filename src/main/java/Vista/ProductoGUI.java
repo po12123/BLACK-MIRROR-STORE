@@ -374,13 +374,14 @@ public class ProductoGUI extends javax.swing.JFrame {
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
         int fila = tablaProductos.rowAtPoint(evt.getPoint());
-        textCodigo.setText(tablaProductos.getValueAt(fila, 0).toString());
-        textMarca.setText(tablaProductos.getValueAt(fila, 1).toString());
-        textModelo.setText(tablaProductos.getValueAt(fila, 2).toString());
-        textCantidad1.setText(tablaProductos.getValueAt(fila, 3).toString());
-        cBoxProveedor.setSelectedItem(tablaProductos.getValueAt(fila, 4).toString());
-        textPrecio.setText(tablaProductos.getValueAt(fila, 5).toString());
-        textCategoria.setText(tablaProductos.getValueAt(fila, 6).toString());
+        textCodigo.setText(tablaProductos.getValueAt(fila, 1).toString());
+        textMarca.setText(tablaProductos.getValueAt(fila, 2).toString());
+        textModelo.setText(tablaProductos.getValueAt(fila, 3).toString());
+        textCantidad1.setText(tablaProductos.getValueAt(fila, 4).toString());
+        cBoxProveedor.setSelectedItem(tablaProductos.getValueAt(fila, 5).toString());
+        textPrecio.setText(tablaProductos.getValueAt(fila, 6).toString());
+        textCategoria.setText(tablaProductos.getValueAt(fila, 7).toString());
+        producto.setId((int)((tablaProductos.getValueAt(fila, 0))));
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     /**
