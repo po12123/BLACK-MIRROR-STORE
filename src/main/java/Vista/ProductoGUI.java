@@ -168,7 +168,11 @@ public class ProductoGUI extends javax.swing.JFrame {
         jLabel5.setText("Categoria:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
-        textPrecio.setText("Bs");
+        textPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textPrecioActionPerformed(evt);
+            }
+        });
         jPanel2.add(textPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 269, 142, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -383,6 +387,10 @@ public class ProductoGUI extends javax.swing.JFrame {
         textCategoria.setText(tablaProductos.getValueAt(fila, 7).toString());
         producto.setId((int)((tablaProductos.getValueAt(fila, 0))));
     }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void textPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPrecioActionPerformed
 
     /**
      * @param args the command line arguments
