@@ -44,6 +44,7 @@ public class MsgDatosIncorrectos extends javax.swing.JFrame {
         jLabel5.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));

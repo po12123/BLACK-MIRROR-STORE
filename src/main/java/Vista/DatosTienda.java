@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import java.awt.Color;
+
 /**
  *
  * @author njesp
@@ -13,6 +15,7 @@ public class DatosTienda extends javax.swing.JFrame {
     /**
      * Creates new form DatosTienda
      */
+    private MenuPrincipal menuP;
     public DatosTienda() {
         initComponents();
     }
@@ -26,6 +29,7 @@ public class DatosTienda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblNit = new javax.swing.JLabel();
@@ -38,6 +42,8 @@ public class DatosTienda extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         txtRazonSocial = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        btnMenu = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +100,27 @@ public class DatosTienda extends javax.swing.JFrame {
         btnActualizar.setText("Actualizar");
         getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
 
+        btnMenu.setBackground(new java.awt.Color(255, 51, 153));
+        btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMenuMouseExited(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("MENU");
+        btnMenu.add(jLabel2);
+
+        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 60, 30));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login_fondo.jpeg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 470));
 
@@ -103,6 +130,20 @@ public class DatosTienda extends javax.swing.JFrame {
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void btnMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseEntered
+        btnMenu.setBackground(Color.PINK);
+    }//GEN-LAST:event_btnMenuMouseEntered
+
+    private void btnMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseExited
+        btnMenu.setBackground(new Color (255,51,153));
+    }//GEN-LAST:event_btnMenuMouseExited
+
+    private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
+        menuP= new MenuPrincipal();
+        menuP.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -141,7 +182,10 @@ public class DatosTienda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JPanel btnMenu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblNit;
